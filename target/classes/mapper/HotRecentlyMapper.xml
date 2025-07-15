@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.HotRecentlyMapper">
+    <resultMap id="hotRecentlyMapper" type="com.tencent.wxcloudrun.model.HotRecently">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="sub" column="sub"/>
+        <result property="price" column="price"/>
+        <result property="score" column="score"/>®
+        <result property="img" column="img"/>
+    </resultMap>
+
+    <select id="getHotRecently" resultMap="hotRecentlyMapper" parameterType="com.tencent.wxcloudrun.model.HotRecently">
+        SELECT `id`, `name`, `price`, `score`,`img`
+        FROM hotMgr
+        WHERE id = #{id}
+        <where>
+            <if test="ipaddr != null and ipaddr != ''">
+                AND ipaddr like concat('%', #{ipaddr}, '%')
+            </if>
+            <if test="status != null and status != ''">
+                AND status = #{status}
+            </if>
+            <if test="userName != null and userName != ''">
+                AND user_name like concat('%', #{userName}, '%')
+            </if>
+            <if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
+                AND login_time &gt;= #{params.beginTime}
+            </if>
+            <if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+                AND login_time &lt;= #{params.endTime}
+            </if>
+        </where>
+    </select>
+</mapper>
