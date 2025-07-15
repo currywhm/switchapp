@@ -13,6 +13,4 @@ public class HotRecentlyRequest {
     private Integer price;
 
     private String score;
-
-    private String img;
 }

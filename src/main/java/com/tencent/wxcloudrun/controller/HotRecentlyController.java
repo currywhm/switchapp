@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -39,8 +40,10 @@ public class HotRecentlyController {
     @PostMapping(value = "/api/switchapp/hotMgr")
     ApiResponse getHotRecently(@RequestBody(required = false)  HotRecentlyRequest request) {
         try{
-            Optional<HotRecently> hotRecently = hotRecentlyService.getHotRecently(request);
-            logger.info(String.valueOf(hotRecently));
+            List<HotRecently> hotRecently = hotRecentlyService.getHotRecently(request);
+            if (hotRecently.isEmpty()) {
+                logger.error("hotRecently is empty");
+            }
             return ApiResponse.ok(hotRecently);
         }catch (Exception e){
             return ApiResponse.error(e.getMessage());

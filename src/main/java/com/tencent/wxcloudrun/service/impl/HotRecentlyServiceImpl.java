@@ -7,6 +7,7 @@ import com.tencent.wxcloudrun.model.HotRecently;
 import com.tencent.wxcloudrun.service.HotRecentlyService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,14 +20,13 @@ public class HotRecentlyServiceImpl implements HotRecentlyService {
     }
 
     @Override
-    public Optional<HotRecently> getHotRecently(HotRecentlyRequest recentlyRequest) {
+    public List<HotRecently> getHotRecently(HotRecentlyRequest recentlyRequest) {
         HotRecently hotRecently = new HotRecently();
         hotRecently.setId(recentlyRequest.getId());
         hotRecently.setName(recentlyRequest.getName());
         hotRecently.setSub(recentlyRequest.getSub());
         hotRecently.setPrice(recentlyRequest.getPrice());
         hotRecently.setScore(recentlyRequest.getScore());
-        return Optional.ofNullable(hotRecentlyMapper.getHotRecently(hotRecently));
-
+        return hotRecentlyMapper.getHotRecently(hotRecently);
     }
 }
