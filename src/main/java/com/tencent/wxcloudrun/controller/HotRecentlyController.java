@@ -37,7 +37,7 @@ public class HotRecentlyController {
      * @return API response json
      */
     @PostMapping(value = "/api/switchapp/hotMgr")
-    ApiResponse get(@RequestBody HotRecentlyRequest request) {
+    ApiResponse get(@RequestBody(required = false)  HotRecentlyRequest request) {
         logger.info("/api/switchapp/hotMgr post request, action: {}", request.getName());
         try{
             Optional<HotRecently> hotRecently = hotRecentlyService.getHotRecently(request);
