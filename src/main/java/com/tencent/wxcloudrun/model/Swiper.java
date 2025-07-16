@@ -9,6 +9,6 @@ public class Swiper {
 
     private String type;
 
-    private String image;
+    private String img;
 
 }

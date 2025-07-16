@@ -4,10 +4,10 @@
     <resultMap id="swiperMapper" type="com.tencent.wxcloudrun.model.Swiper">
         <id property="id" column="id"/>
         <result property="type" column="type"/>
-        <result property="image" column="image"/>
+        <result property="img" column="img"/>
     </resultMap>
     <select id="getSwiper" resultMap="swiperMapper" parameterType="com.tencent.wxcloudrun.model.Swiper">
-        SELECT `id`, `type`, `image`
+        SELECT `id`, `type`, `img`
         FROM swiper
         <where>
             <if test="id != null and id != ''">
