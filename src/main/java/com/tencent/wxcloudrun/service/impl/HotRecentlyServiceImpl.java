@@ -5,6 +5,7 @@ import com.tencent.wxcloudrun.dao.HotRecentlyMapper;
 import com.tencent.wxcloudrun.dto.HotRecentlyRequest;
 import com.tencent.wxcloudrun.model.HotRecently;
 import com.tencent.wxcloudrun.service.HotRecentlyService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,11 +22,7 @@ public class HotRecentlyServiceImpl implements HotRecentlyService {
     @Override
     public List<HotRecently> getHotRecently(HotRecentlyRequest recentlyRequest) {
         HotRecently hotRecently = new HotRecently();
-        hotRecently.setId(recentlyRequest.getId());
-        hotRecently.setName(recentlyRequest.getName());
-        hotRecently.setSub(recentlyRequest.getSub());
-        hotRecently.setPrice(recentlyRequest.getPrice());
-        hotRecently.setScore(recentlyRequest.getScore());
+        BeanUtils.copyProperties(recentlyRequest, hotRecently);
         return hotRecentlyMapper.getHotRecently(hotRecently);
     }
 }

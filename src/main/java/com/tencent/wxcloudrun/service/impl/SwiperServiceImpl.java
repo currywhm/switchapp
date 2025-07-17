@@ -4,6 +4,7 @@ import com.tencent.wxcloudrun.dao.SwiperMapper;
 import com.tencent.wxcloudrun.dto.SwiperRequest;
 import com.tencent.wxcloudrun.model.Swiper;
 import com.tencent.wxcloudrun.service.SwiperService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,9 +20,7 @@ public class SwiperServiceImpl implements SwiperService {
     @Override
     public List<Swiper> getSwiper(SwiperRequest swiperRequest) {
         Swiper swiper = new Swiper();
-        swiper.setId(swiperRequest.getId());
-        swiper.setType(swiperRequest.getType());
-
+        BeanUtils.copyProperties(swiperRequest, swiper);
         return swiperMapper.getSwiper(swiper);
     }
 }
